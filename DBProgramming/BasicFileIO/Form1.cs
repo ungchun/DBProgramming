@@ -40,7 +40,7 @@ namespace BasicFileIO
         {
             BinaryReader br = new BinaryReader(new FileStream("a.dat", FileMode.Open));
             int num1 = br.ReadInt32();
-            Console.WriteLine("Read Int = " + num1);
+            Console.WriteLine("read int result = " + num1);
             br.Close();
             //byte[] rBytes = new byte[8];
 
@@ -56,7 +56,7 @@ namespace BasicFileIO
         }
         private void InitVariables()
         {
-            textBoxDisplay.Text = "hello";
+            textBoxDisplay.Text = "asdasdasdasdasd";
         }
 
         private void buttonBinaryWriter_Click(object sender, EventArgs e)
@@ -73,9 +73,9 @@ namespace BasicFileIO
         {
             StreamWriter sw = new StreamWriter(new FileStream("a.txt", FileMode.Create));
             sw.WriteLine(int.MaxValue);
-            sw.WriteLine("good morning");
+            sw.WriteLine("kimsunghun");
             sw.WriteLine(uint.MaxValue);
-            sw.WriteLine("안녕하세요");
+            sw.WriteLine("반갑습니다");
             sw.WriteLine(double.MaxValue);
             sw.Close();
 
