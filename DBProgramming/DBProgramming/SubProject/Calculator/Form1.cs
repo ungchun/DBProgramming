@@ -32,8 +32,8 @@ namespace Calculator
 
         private void buttonComboBoxCak_Click(object sender, EventArgs e)
         {
-            String oper1 = textBoxComboCak_Oper1.Text;
-            String oper2 = textBoxComboCak_Oper2.Text;
+            String oper1_conflict = textBoxComboCak_Oper1.Text;
+            String oper2_conflict = textBoxComboCak_Oper2.Text;
 
             String oper = "";
             int result = 0;
@@ -44,19 +44,19 @@ namespace Calculator
                 case 0:
                     oper = "+";
                     // Convert : String -> Int
-                    result = Convert.ToInt32(oper1) + Convert.ToInt32(oper2);
+                    result = Convert.ToInt32(oper1_conflict) + Convert.ToInt32(oper2_conflict);
                     break;
                 case 1:
                     oper = "-";
-                    result = Convert.ToInt32(oper1) - Convert.ToInt32(oper2);
+                    result = Convert.ToInt32(oper1_conflict) - Convert.ToInt32(oper2_conflict);
                     break;
                 case 2:
                     oper = "*";
-                    result = Convert.ToInt32(oper1) * Convert.ToInt32(oper2);
+                    result = Convert.ToInt32(oper1_conflict) * Convert.ToInt32(oper2_conflict);
                     break;
                 case 3:
                     oper = "/";
-                    result = Convert.ToInt32(oper1) / Convert.ToInt32(oper2);
+                    result = Convert.ToInt32(oper1_conflict) / Convert.ToInt32(oper2_conflict);
                     break;
             }
 
@@ -67,8 +67,8 @@ namespace Calculator
 
         private void buttonRB_Calculate_Click(object sender, EventArgs e)
         {
-            String oper1 = textBoxRB_Oper1.Text;
-            String oper2 = textBoxRB_Oper2.Text;
+            String oper1_conflict = textBoxRB_Oper1.Text;
+            String oper2_conflict = textBoxRB_Oper2.Text;
 
             double result = 0;
 
@@ -79,28 +79,28 @@ namespace Calculator
             // radioBtn이 무엇인지 checked 판단해서 사칙연산 계산 ( 소수점 계산을 위해 double )
             if (radioButtonAdd.Checked)
             {
-                result = Convert.ToDouble(oper1) + Convert.ToDouble(oper2);
+                result = Convert.ToDouble(oper1_conflict) + Convert.ToDouble(oper2_conflict);
             }
             else if(radioButtonSub.Checked)
             {
-                result = Convert.ToDouble(oper1) - Convert.ToDouble(oper2);
+                result = Convert.ToDouble(oper1_conflict) - Convert.ToDouble(oper2_conflict);
             }
             else if (radioButtonMul.Checked)
             {
-                result = Convert.ToDouble(oper1) * Convert.ToDouble(oper2);
+                result = Convert.ToDouble(oper1_conflict) * Convert.ToDouble(oper2_conflict);
             }
             else if(radioButtonDivi.Checked)
             {
-                result = Convert.ToDouble(oper1) / Convert.ToDouble(oper2);
+                result = Convert.ToDouble(oper1_conflict) / Convert.ToDouble(oper2_conflict);
             }
             // 제곱연산
             else
             {
                 // 2^3 이면 2를 제곱해줘야해서 따로 변수로 저장
-                int num1 = Convert.ToInt32(oper1);
+                int num1 = Convert.ToInt32(oper1_conflict);
                 binomial = num1;
                 // 2^3 이면 3제곱을 해야해서 for문 사용해서 제곱계산
-                for(int i = 1; i < Convert.ToInt32(oper2); i++)
+                for(int i = 1; i < Convert.ToInt32(oper2_conflict); i++)
                 {
                     binomial *= num1;
                 }
