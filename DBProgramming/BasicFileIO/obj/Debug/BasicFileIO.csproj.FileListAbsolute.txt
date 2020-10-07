@@ -1,0 +1,10 @@
+C:\Users\leedo\source\repos\DBProgramming\BasicFileIO\bin\Debug\BasicFileIO.exe.config
+C:\Users\leedo\source\repos\DBProgramming\BasicFileIO\bin\Debug\BasicFileIO.exe
+C:\Users\leedo\source\repos\DBProgramming\BasicFileIO\bin\Debug\BasicFileIO.pdb
+C:\Users\leedo\source\repos\DBProgramming\BasicFileIO\obj\Debug\BasicFileIO.csprojAssemblyReference.cache
+C:\Users\leedo\source\repos\DBProgramming\BasicFileIO\obj\Debug\BasicFileIO.Form1.resources
+C:\Users\leedo\source\repos\DBProgramming\BasicFileIO\obj\Debug\BasicFileIO.Properties.Resources.resources
+C:\Users\leedo\source\repos\DBProgramming\BasicFileIO\obj\Debug\BasicFileIO.csproj.GenerateResource.cache
+C:\Users\leedo\source\repos\DBProgramming\BasicFileIO\obj\Debug\BasicFileIO.csproj.CoreCompileInputs.cache
+C:\Users\leedo\source\repos\DBProgramming\BasicFileIO\obj\Debug\BasicFileIO.exe
+C:\Users\leedo\source\repos\DBProgramming\BasicFileIO\obj\Debug\BasicFileIO.pdb
