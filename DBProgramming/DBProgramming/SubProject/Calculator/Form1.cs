@@ -32,31 +32,37 @@ namespace Calculator
 
         private void buttonComboBoxCak_Click(object sender, EventArgs e)
         {
-            String oper1_conflict = textBoxComboCak_Oper1.Text;
-            String oper2_conflict = textBoxComboCak_Oper2.Text;
+            String oper1_conflict_test = textBoxComboCak_Oper1.Text;
+            String oper2_conflict_test = textBoxComboCak_Oper2.Text;
 
-            String oper = "";
             int result = 0;
+            String oper = "";
 
-            // comboBox index로 사칙연산 판단해서 계산
+            // comboBox index로 사칙연산 판단해서 계산하는데 왜 conflict가 안뜨지??ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
             switch (comboBoxComboCak_Operator.SelectedIndex)
             {
                 case 0:
                     oper = "+";
                     // Convert : String -> Int
-                    result = Convert.ToInt32(oper1_conflict) + Convert.ToInt32(oper2_conflict);
+                    result = Convert.ToInt32(oper1_conflict_test) + Convert.ToInt32(oper2_conflict_test);
                     break;
                 case 1:
                     oper = "-";
-                    result = Convert.ToInt32(oper1_conflict) - Convert.ToInt32(oper2_conflict);
+                    result = Convert.ToInt32(oper1_conflict_test) - Convert.ToInt32(oper2_conflict_test);
                     break;
                 case 2:
                     oper = "*";
-                    result = Convert.ToInt32(oper1_conflict) * Convert.ToInt32(oper2_conflict);
+                    result = Convert.ToInt32(oper1_conflict_test) * Convert.ToInt32(oper2_conflict_test);
+
+
+
                     break;
                 case 3:
                     oper = "/";
-                    result = Convert.ToInt32(oper1_conflict) / Convert.ToInt32(oper2_conflict);
+                    result = Convert.ToInt32(oper1_conflict_test) / Convert.ToInt32(oper2_conflict_test);
+
+
+
                     break;
             }
 
