@@ -14,6 +14,13 @@ namespace StudentManagerment
 {
     public partial class Form1 : Form
     {
+        // 학생수 3명 count할 변수
+        int studentCount;
+        // 어디부분에서 save 버튼 눌렀는지 확인하는 token
+        int saveStudentToken;
+        // reset할 부분
+        int textFlag;
+        // strcoon
         string strcoon = "Server=49.50.174.201;Database=s5414030;Uid=s5414030;Pwd=s5414030;Charset=utf8";
 
         public Form1()
@@ -26,25 +33,39 @@ namespace StudentManagerment
 
         private void InitVariables()
         {
+            // init comboBox
+            comboBoxStudent1Gender.Items.Clear();
             comboBoxStudent2Gender.Items.Clear();
-            comboBoxStudent2Gender.Items.Add("남자");
-            comboBoxStudent2Gender.Items.Add("여자");
-
             comboBoxStudent3Gender.Items.Clear();
             string[] genderData = { "남자", "여자" };
+            comboBoxStudent1Gender.Items.AddRange(genderData);
+            comboBoxStudent2Gender.Items.AddRange(genderData);
             comboBoxStudent3Gender.Items.AddRange(genderData);
+            //
 
+            // autoLoad Check 확인
             if (checkBoxAutoLoad.Checked)
             {
                 LoadStudent();
             }
         }
 
+        private int checkStudentCount()
+        {
+            if (studentCount == 3)
+            {
+                MessageBox.Show("학생수가 3명입니다.");
+                return 0;
+            }
+            return 1;
+        }
 
-        int studentCount;
+
         private void InitStudentNumber()
         {
             studentCount = 0;
+            
+            // using 메서드 만들기 전부다
             using (MySqlConnection conn = new MySqlConnection(strcoon))
             {
                 conn.Open();
@@ -74,81 +95,85 @@ namespace StudentManagerment
             LoadStudent();
         }
 
+        private void resetText(int textFlag)
+        {
+            switch (textFlag)
+            {
+                case 1:
+                    textBoxStudent1Name.Text = "학생정보 없음";
+                    textBoxStudent1Id.Text = "";
+                    comboBoxStudent1Gender.Text = "";
+                    textBoxStudent1Memo.Text = "";
+                    break;
+                case 2:
+                    textBoxStudent2Name.Text = "학생정보 없음";
+                    textBoxStudent2Id.Text = "";
+                    comboBoxStudent2Gender.Text = "";
+                    textBoxStudent2Memo.Text = "";
+                    break;
+                case 3:
+                    textBoxStudent3Name.Text = "학생정보 없음";
+                    textBoxStudent3Id.Text = "";
+                    comboBoxStudent3Gender.Text = "";
+                    textBoxStudent3Memo.Text = "";
+                    break;
+                case 4:
+                    textBoxStudent1Name.Text = "학생정보 없음";
+                    textBoxStudent1Id.Text = "";
+                    comboBoxStudent1Gender.Text = "";
+                    textBoxStudent1Memo.Text = "";
+
+                    textBoxStudent2Name.Text = "학생정보 없음";
+                    textBoxStudent2Id.Text = "";
+                    comboBoxStudent2Gender.Text = "";
+                    textBoxStudent2Memo.Text = "";
+
+                    textBoxStudent3Name.Text = "학생정보 없음";
+                    textBoxStudent3Id.Text = "";
+                    comboBoxStudent3Gender.Text = "";
+                    textBoxStudent3Memo.Text = "";
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void buttonStudent1Save_Click(object sender, EventArgs e)
         {
-            if(studentCount == 3)
+            if (checkStudentCount() == 0)
             {
-                MessageBox.Show("학생수가 3명입니다.");
                 return;
             }
-
-            string name = textBoxStudent1Name.Text;   // 이름
-            string number = textBoxStudent1Id.Text; // 학번
-            string gender = comboBoxStudent1Gender.Text; // 성별
-            string memo = textBoxStudent1Memo.Text;   // 메모
-            using (MySqlConnection conn = new MySqlConnection(strcoon))
-            {
-                conn.Open();
-                string query = "INSERT INTO student(stu_name,stu_number,stu_gender,stu_memo) " +
-                    "values(" + "'" + name + "'" + "," + "'" + number + "'" + "," + "'" + gender + "'" + "," + "'" + memo + "'" + ")";
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                cmd.ExecuteNonQuery();
-            }
-            InitStudentNumber();
-            //saveStudentToken = 1;
-            //SaveStudent();
+            saveStudentToken = 1;
+            SaveStudent();
         }
 
         private void buttonStudent2Save_Click(object sender, EventArgs e)
         {
-            if (studentCount == 3)
+            if (checkStudentCount() == 0)
             {
-                MessageBox.Show("학생수가 3명입니다.");
                 return;
             }
-            string name = textBoxStudent2Name.Text;   // 이름
-            string number = textBoxStudent2Id.Text; // 학번
-            string gender = comboBoxStudent2Gender.Text; // 성별
-            string memo = textBoxStudent2Memo.Text;   // 메모
-            using (MySqlConnection conn = new MySqlConnection(strcoon))
-            {
-                conn.Open();
-                string query = "INSERT INTO student(stu_name,stu_number,stu_gender,stu_memo) " +
-                    "values(" + "'" + name + "'" + "," + "'" + number + "'" + "," + "'" + gender + "'" + "," + "'" + memo + "'" + ")";
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                cmd.ExecuteNonQuery();
-            }
-            InitStudentNumber();
-            //saveStudentToken = 2;
-            //SaveStudent();
+            saveStudentToken = 2;
+            SaveStudent();
         }
 
         private void buttonStudent3Save_Click(object sender, EventArgs e)
         {
-            if (studentCount == 3)
+            if (checkStudentCount() == 0)
             {
-                MessageBox.Show("학생수가 3명입니다.");
                 return;
             }
-            string name = textBoxStudent3Name.Text;   // 이름
-            string number = textBoxStudent3Id.Text; // 학번
-            string gender = comboBoxStudent3Gender.Text; // 성별
-            string memo = textBoxStudent3Memo.Text;   // 메모
-            using (MySqlConnection conn = new MySqlConnection(strcoon))
-            {
-                conn.Open();
-                string query = "INSERT INTO student(stu_name,stu_number,stu_gender,stu_memo) " +
-                    "values(" + "'" + name + "'" + "," + "'" + number + "'" + "," + "'" + gender + "'" + "," + "'" + memo + "'" + ")";
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                cmd.ExecuteNonQuery();
-            }
-            InitStudentNumber();
-            //saveStudentToken = 3;
-            //SaveStudent();
+            saveStudentToken = 3;
+            SaveStudent();
         }
 
         private void LoadStudent()
         {
+            // 전부다 reset -> 4
+            textFlag = 4;
+            resetText(textFlag);
+
             using (MySqlConnection conn = new MySqlConnection(strcoon))
             {
                 // 학생수 count 위한 temp 변수
@@ -164,48 +189,115 @@ namespace StudentManagerment
                 {
                     if (temp == 1)
                     {
-                        var a = rdr["stu_name"];
-                        var b = rdr["stu_number"];
-                        var c = rdr["stu_gender"];
-                        var d = rdr["stu_memo"];
-                        textBoxStudent1Name.Text = Convert.ToString(a);
-                        textBoxStudent1Id.Text = Convert.ToString(b);
-                        comboBoxStudent1Gender.Text = Convert.ToString(c);
-                        textBoxStudent1Memo.Text = Convert.ToString(d);
+                        string a = rdr["stu_name"].ToString();
+                        string b = rdr["stu_number"].ToString();
+                        string c = rdr["stu_gender"].ToString();
+                        string d = rdr["stu_memo"].ToString();
+                        textBoxStudent1Name.Text = a;
+                        textBoxStudent1Id.Text = b;
+                        comboBoxStudent1Gender.Text = c;
+                        textBoxStudent1Memo.Text = d;
                         temp++;
                     }
                     else if (temp == 2)
                     {
-                        var a = rdr["stu_name"];
-                        var b = rdr["stu_number"];
-                        var c = rdr["stu_gender"];
-                        var d = rdr["stu_memo"];
-                        textBoxStudent2Name.Text = Convert.ToString(a);
-                        textBoxStudent2Id.Text = Convert.ToString(b);
-                        comboBoxStudent2Gender.Text = Convert.ToString(c);
-                        textBoxStudent2Memo.Text = Convert.ToString(d);
+                        string a = rdr["stu_name"].ToString();
+                        string b = rdr["stu_number"].ToString();
+                        string c = rdr["stu_gender"].ToString();
+                        string d = rdr["stu_memo"].ToString();
+                        textBoxStudent2Name.Text = a;
+                        textBoxStudent2Id.Text = b;
+                        comboBoxStudent2Gender.Text = c;
+                        textBoxStudent2Memo.Text = d;
                         temp++;
                     }
                     else
                     {
-                        var a = rdr["stu_name"];
-                        var b = rdr["stu_number"];
-                        var c = rdr["stu_gender"];
-                        var d = rdr["stu_memo"];
-                        textBoxStudent3Name.Text = Convert.ToString(a);
-                        textBoxStudent3Id.Text = Convert.ToString(b);
-                        comboBoxStudent3Gender.Text = Convert.ToString(c);
-                        textBoxStudent3Memo.Text = Convert.ToString(d);
+                        string a = rdr["stu_name"].ToString();
+                        string b = rdr["stu_number"].ToString();
+                        string c = rdr["stu_gender"].ToString();
+                        string d = rdr["stu_memo"].ToString();
+                        textBoxStudent3Name.Text = a;
+                        textBoxStudent3Id.Text = b;
+                        comboBoxStudent3Gender.Text = c;
+                        textBoxStudent3Memo.Text = d;
                     }
                 }
                 rdr.Close();
             }
         }
 
-
+        // 저장할때 학번 비교해서 같은거 있으면 저장 x 예외처리
+        // 저장할때 공백이면 저장 x
         private void SaveStudent()
         {
+            string name;
+            string number;
+            string gender;
+            string memo;
 
+            switch (saveStudentToken) {
+                case 1:
+                    name = textBoxStudent1Name.Text;   // 이름
+                    number = textBoxStudent1Id.Text; // 학번
+                    gender = comboBoxStudent1Gender.Text; // 성별
+                    memo = textBoxStudent1Memo.Text;   // 메모
+                    if(name=="" || number ==""|| gender == "")
+                    {
+                        MessageBox.Show("공백을 채워주세요");
+                        return;
+                    }
+                    using (MySqlConnection conn = new MySqlConnection(strcoon))
+                    {
+                        conn.Open();
+                        string query = "INSERT INTO student(stu_name,stu_number,stu_gender,stu_memo) " +
+                            "values(" + "'" + name + "'" + "," + "'" + number + "'" + "," + "'" + gender + "'" + "," + "'" + memo + "'" + ")";
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+                        cmd.ExecuteNonQuery();
+                    }
+                    break;
+                case 2:
+                    name = textBoxStudent2Name.Text;   // 이름
+                    number = textBoxStudent2Id.Text; // 학번
+                    gender = comboBoxStudent2Gender.Text; // 성별
+                    memo = textBoxStudent2Memo.Text;   // 메모
+                    if (name == "" || number == "" || gender == "")
+                    {
+                        MessageBox.Show("공백을 채워주세요");
+                        return;
+                    }
+                    using (MySqlConnection conn = new MySqlConnection(strcoon))
+                    {
+                        conn.Open();
+                        string query = "INSERT INTO student(stu_name,stu_number,stu_gender,stu_memo) " +
+                            "values(" + "'" + name + "'" + "," + "'" + number + "'" + "," + "'" + gender + "'" + "," + "'" + memo + "'" + ")";
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+                        cmd.ExecuteNonQuery();
+                    }
+                    break;
+                case 3:
+                    name = textBoxStudent3Name.Text;   // 이름
+                    number = textBoxStudent3Id.Text; // 학번
+                    gender = comboBoxStudent3Gender.Text; // 성별
+                    memo = textBoxStudent3Memo.Text;   // 메모
+                    if (name == "" || number == "" || gender == "")
+                    {
+                        MessageBox.Show("공백을 채워주세요");
+                        return;
+                    }
+                    using (MySqlConnection conn = new MySqlConnection(strcoon))
+                    {
+                        conn.Open();
+                        string query = "INSERT INTO student(stu_name,stu_number,stu_gender,stu_memo) " +
+                            "values(" + "'" + name + "'" + "," + "'" + number + "'" + "," + "'" + gender + "'" + "," + "'" + memo + "'" + ")";
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+                        cmd.ExecuteNonQuery();
+                    }
+                    break;
+                default:
+                    break;
+            }
+            InitStudentNumber();
         }
 
         // delete는 file delete 후에 count-- 해주고 기본 세팅 및 count 표시
@@ -219,10 +311,9 @@ namespace StudentManagerment
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 cmd.ExecuteNonQuery();
             }
-            textBoxStudent1Name.Text = "학생정보 없음";
-            textBoxStudent1Id.Text = "";
-            comboBoxStudent1Gender.Text = "";
-            textBoxStudent1Memo.Text = "";
+            // 학생 1 delete 후 reset
+            textFlag = 1;
+            resetText(textFlag);
             InitStudentNumber();
         }
 
@@ -236,10 +327,9 @@ namespace StudentManagerment
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 cmd.ExecuteNonQuery();
             }
-            textBoxStudent2Name.Text = "학생정보 없음";
-            textBoxStudent2Id.Text = "";
-            comboBoxStudent2Gender.Text = "";
-            textBoxStudent2Memo.Text = "";
+            // 학생 2 delete 후 reset
+            textFlag = 2;
+            resetText(textFlag);
             InitStudentNumber();
         }
 
@@ -253,10 +343,9 @@ namespace StudentManagerment
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 cmd.ExecuteNonQuery();
             }
-            textBoxStudent3Name.Text = "학생정보 없음";
-            textBoxStudent3Id.Text = "";
-            comboBoxStudent3Gender.Text = "";
-            textBoxStudent3Memo.Text = "";
+            // 학생 3 delete 후 reset
+            textFlag = 3;
+            resetText(textFlag);
             InitStudentNumber();
         }
     }
